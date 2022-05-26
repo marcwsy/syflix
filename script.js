@@ -135,10 +135,13 @@ function updateTable() {
 function titleCounter() {
     const movies = JSON.parse(localStorage.getItem('movieLibrary'));
     let libLength = 0;
-    for (let i = 0; i < movies.length; i++) {
-        libLength = i;
+    if (movies === null) {
+    } else {
+        for (let i = 0; i < (movies.length + 1); i++) {
+            libLength = i;
+        }
+        return showingTitle.textContent = `Showing ${libLength} titles`;
     }
-    return showingTitle.textContent = `Showing ${libLength} titles`;
 }
 
 
