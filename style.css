@@ -52,18 +52,18 @@ h2 {
 }
 
 .directors {
-    width: 280px;
+    width: 275px;
 }
 
 .rating, .star {
-    width: 10px;
+    width: 12px;
     margin: 5px;
 }
 
 .rating-group {
     display: flex;
     justify-content: flex-start;
-    width: 45px;
+    width: 52px;
     align-items: center;
 }
 
@@ -118,6 +118,10 @@ h2 {
 }
 
 .movie-row {
+    display: none;
+}
+
+.movie-row.active {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
