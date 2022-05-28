@@ -8,7 +8,6 @@ const table = document.querySelector('.movie-table');
 const errorMsg = document.querySelector('.error-msg');
 const showingTitle = document.querySelector('.showing');
 
-
 function openModal() {
     modal.classList.add('active');
     movieForm.reset();
