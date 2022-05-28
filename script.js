@@ -38,23 +38,22 @@ class Movie {
 
 class MovieLibrary {
     constructor() {
-      this.movies = []
+        this.movies = []
     }
   
     addMovie(newMovie) {
-      if (!this.isInLibrary(newMovie)) {
-        this.movies.push(newMovie)
-      }
+        if (!this.isInLibrary(newMovie)) {
+            this.movies.push(newMovie)
+        }
     }
   
     removeMovie(title) {
-      this.movies = this.movies.filter((movie) => movie.title !== title)
+        this.movies = this.movies.filter((movie) => movie.title !== title)
     }
   
     isInLibrary(newMovie) {
-      return this.movies.some((movie) => movie.title === newMovie.title)
+        return this.movies.some((movie) => movie.title === newMovie.title)
     }
-
 }
 
 const movieLibrary = new MovieLibrary()
@@ -94,6 +93,7 @@ function createTable(movie) {
     const deleteRow = document.createElement('button');
 
     movieTable.classList.add('movie-row');
+    movieTable.classList.add('active');
     tableButton.classList.add('button-group');
     deleteRow.classList.add('btn');
     deleteRow.classList.add('btn-outline-danger');
@@ -133,11 +133,11 @@ function updateTable() {
 
 
 function titleCounter() {
-    const movies = JSON.parse(localStorage.getItem('movieLibrary'));
+    const list = document.getElementsByTagName('li');
     let libLength = 0;
-    if (movies === null) {
+    if (list === null) {
     } else {
-        for (let i = 0; i < (movies.length + 1); i++) {
+        for (let i = 0; i < (list.length + 1); i++) {
             libLength = i;
         }
         return showingTitle.textContent = `Showing ${libLength} titles`;
@@ -180,14 +180,26 @@ function searchBar() {
         let pDirector = list[i].getElementsByTagName('p')[1];
         const titleTextValue = pTitle.textContent || pTitle.innerText;
         const directorTextValue = pDirector.textContent || pDirector.textContent;
-
+        console.log(list[i]);
         if (titleTextValue.toUpperCase().indexOf(filter) > -1) {
             list[i].style.display = '';
+            list[i].classList.add('active');
         } else if (directorTextValue.toUpperCase().indexOf(filter) > -1) {
             list[i].style.display = '';
+            list[i].classList.add('active');
         } else {
-            list[i].style.display = 'none';
+            list[i].classList.remove('active');
         }
+    }
+    const actives = document.getElementsByClassName('active');
+    console.log(actives);
+    let libLength = 0;
+    if (actives === null) {
+    } else {
+        for (let i = 0; i < (actives.length + 1); i++) {
+            libLength = i;
+        }
+        return showingTitle.textContent = `Showing ${libLength} titles`;
     }
 }
 
