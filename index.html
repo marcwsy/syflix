@@ -31,7 +31,7 @@
                 <p class="error-msg"></p>
                 <input type="text" id="director" name="movie-director" maxlength="30" placeholder="Director" pattern="[a-zA-Z0-9- ]+" required />
                 <input type="number" id="rating" name="movie-rating" max="10.0" step=".1" placeholder="Rating" required />
-                <button type="submit" class="btn btn-outline-dark">Submit</button>
+                <button type="submit" class="btn btn-outline-dark" id="submit">Submit</button>
                 <button type="button" class="btn btn-outline-dark" id="closeModal">Close</button>
             </form>
         </div>
@@ -46,7 +46,7 @@
             <div class="sorting">
                 <div class="dropdown">
                     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Sort by:
+                    Sort by
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <button type="button" class="dropdown-item" id="sortTitle">Title (a-z)</button>
