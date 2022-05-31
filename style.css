@@ -15,6 +15,7 @@
     --bs-danger: #d75d69;
     --shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     --bs-secondary: #efefef;
+    --bs-success: #efefef;
 }
 
 html {
@@ -180,6 +181,10 @@ h2 {
     margin-top: 20px;
 }
 
+.btn-outline-success {
+    border: var(--bs-success);
+}
+
 .btn-outline-danger {
     color: var(--bs-danger);
     border: var(--bs-danger);
@@ -192,11 +197,13 @@ h2 {
 .btn-secondary {
     background-color: var(--bs-secondary);
     color: black;
+    border: var(--bs-secondary);
 }
 
 .btn-secondary:hover {
     background-color: #b1b3b6;
 }
+
 
 .list-header {
     display: flex;
