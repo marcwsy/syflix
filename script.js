@@ -1,4 +1,5 @@
 
+// global variables
 const modal = document.querySelector('.modal-container');
 const addBtn = document.getElementById('addMovieBtn');
 const closeBtn = document.getElementById('closeModal');
@@ -7,7 +8,17 @@ const movieList = document.querySelector('.movie-list');
 const table = document.querySelector('.movie-table');
 const errorMsg = document.querySelector('.error-msg');
 const showingTitle = document.querySelector('.showing');
+const sortTitleBtn = document.getElementById('sortTitle');
+const sortRatingBtn = document.getElementById('sortRating');
 
+// event listeners
+addBtn.addEventListener('click', openModal);
+closeBtn.addEventListener('click', closeModal);
+movieForm.addEventListener('submit', addMovieToTable);
+sortTitleBtn.addEventListener('click', sortTitle);
+sortRatingBtn.addEventListener('click', sortRating);
+
+// modal functions
 function openModal() {
     modal.classList.add('active');
     movieForm.reset();
@@ -19,10 +30,7 @@ function closeModal() {
     errorMsg.textContent = '';
 }
 
-addBtn.addEventListener('click', openModal);
-closeBtn.addEventListener('click', closeModal);
-movieForm.addEventListener('submit', addMovieToTable);
-
+// classes
 class Movie {
     constructor(
         title = 'blank',
@@ -57,11 +65,12 @@ class MovieLibrary {
 
 const movieLibrary = new MovieLibrary()
 
+// creating objects and updating the DOM from user input
 function addMovieInput() {
     const title = document.getElementById('title').value;
     const director = document.getElementById('director').value;
     const rating = document.getElementById('rating').value;
-    return new Movie(title, director, parseFloat(rating));
+    return new Movie(title, director, parseInt(rating));
 }
 
 function addMovieToTable(e) {
@@ -81,6 +90,7 @@ function addMovieToTable(e) {
     closeModal();
 }
 
+// create row in dom
 function createTable(movie) {
     const movieTable = document.createElement('li');
     const title = document.createElement('p');
@@ -130,7 +140,7 @@ function updateTable() {
     titleCounter()
 }
 
-
+// updates showing titles
 function titleCounter() {
     const list = document.getElementsByTagName('li');
     let libLength = 0;
@@ -143,7 +153,8 @@ function titleCounter() {
     }
 }
 
-
+// saves to local storage
+window.onchange = restoreLocal();
 function saveToLocal() {
     localStorage.setItem('movieLibrary', JSON.stringify(movieLibrary.movies));
 }
@@ -154,10 +165,8 @@ function restoreLocal() {
     updateTable();
 }
 
-window.onchange = restoreLocal();
-
 function JSONToMovie(movie) {
-    return new Movie(movie.title, movie.director, parseFloat(movie.rating));
+    return new Movie(movie.title, movie.director, parseInt(movie.rating));
 }
 
 function removeMovie(e) {
@@ -168,6 +177,7 @@ function removeMovie(e) {
     titleCounter()
 }
 
+// simple search function from W3schools including updates to showing titles
 function searchBar() {
     const input = document.getElementById('searchInput');
     const row = document.getElementById('movieList');
@@ -202,6 +212,7 @@ function searchBar() {
     }
 }
 
+// sorting functions for titles and ratings. title sorting from W3schools
 function sortRating() {
     const list = document.getElementById('movieList');
     let items = Array.from(list.querySelectorAll('.movie-row'));
@@ -217,36 +228,20 @@ function sortTitle() {
         var list, i, switching, b, shouldSwitch;
         list = document.getElementById("movieList");
         switching = true;
-        /* Make a loop that will continue until
-        no switching has been done: */
         while (switching) {
-          // Start by saying: no switching is done:
           switching = false;
           b = list.getElementsByTagName("LI");
-          // Loop through all list items:
           for (i = 0; i < (b.length - 1); i++) {
-            // Start by saying there should be no switching:
             shouldSwitch = false;
-            /* Check if the next item should
-            switch place with the current item: */
             if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
-              /* If next item is alphabetically lower than current item,
-              mark as a switch and break the loop: */
               shouldSwitch = true;
               break;
             }
           }
           if (shouldSwitch) {
-            /* If a switch has been marked, make the switch
-            and mark the switch as done: */
             b[i].parentNode.insertBefore(b[i + 1], b[i]);
             switching = true;
           }
         }
 }
-
-const sortTitleBtn = document.getElementById('sortTitle');
-const sortRatingBtn = document.getElementById('sortRating');
-sortTitleBtn.addEventListener('click', sortTitle);
-sortRatingBtn.addEventListener('click', sortRating);
 
