@@ -65,12 +65,18 @@ class MovieLibrary {
 
 const movieLibrary = new MovieLibrary()
 
+function toTitleCase(string) {
+    return string.replace(/\w\S*/g, function(text){
+        return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
+    });
+}
+
 // creating objects and updating the DOM from user input
 function addMovieInput() {
     const title = document.getElementById('title').value;
     const director = document.getElementById('director').value;
     const rating = document.getElementById('rating').value;
-    return new Movie(title, director, parseInt(rating));
+    return new Movie(toTitleCase(title), toTitleCase(director), parseInt(rating));
 }
 
 function addMovieToTable(e) {
